@@ -1,7 +1,9 @@
 package ru.dohod.impl.service;
 
 import com.beust.jcommander.JCommander;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.dohod.api.service.FileChangeService;
 import ru.dohod.api.service.FileSearchService;
 import ru.dohod.api.service.ReadDrivesService;
 import ru.dohod.api.service.UtilityService;
@@ -18,16 +20,22 @@ public class UtilityServiceImpl implements UtilityService {
     private FileSearchCommand fileSearchCommand;
     private ReadDrivesService readDrivesService;
     private FileSearchService fileSearchService;
+    private FileChangeService fileChangeService;
     private static final String READ_DRIVES_COMMAND = "-readDrives";
     private static final String SEARCH_COMMAND = "-search";
     private static final String CHANGE_COMMAND = "-change";
+    private static final String LOCAL_DISK_FOUND_LIST_MSG = "List of local disks found:";
+    private static final String FOUND_FILES_LIST_MSG = "List of found files:";
+    private static final String CHANGED_FILES_LIST_LIST_MSG = "List of changed files:";
 
-    public UtilityServiceImpl(ReadDrivesCommand readDrivesCommand, FileChangeCommand fileChangeCommand, FileSearchCommand fileSearchCommand, ReadDrivesService readDrivesService, FileSearchService fileSearchService) {
+    @Autowired
+    public UtilityServiceImpl(ReadDrivesCommand readDrivesCommand, FileChangeCommand fileChangeCommand, FileSearchCommand fileSearchCommand, ReadDrivesService readDrivesService, FileSearchService fileSearchService, FileChangeService fileChangeService) {
         this.readDrivesCommand = readDrivesCommand;
         this.fileChangeCommand = fileChangeCommand;
         this.fileSearchCommand = fileSearchCommand;
         this.readDrivesService = readDrivesService;
         this.fileSearchService = fileSearchService;
+        this.fileChangeService = fileChangeService;
     }
 
     @Override
@@ -39,18 +47,18 @@ public class UtilityServiceImpl implements UtilityService {
                 .build();
         jCommander.parse(args);
         String parsedCommand = jCommander.getParsedCommand();
-        System.out.println("Command from cli: " + parsedCommand);
-        System.out.println("Command params: " + fileSearchCommand);
-        System.out.println("Command params: " + fileChangeCommand);
         if (READ_DRIVES_COMMAND.equals(parsedCommand)) {
+            System.out.println(LOCAL_DISK_FOUND_LIST_MSG);
             readDrivesService.readDrives();
 
         } else if (SEARCH_COMMAND.equals(parsedCommand)) {
-            fileSearchService.search(fileSearchCommand.getSearchPath(), fileSearchCommand.getSearchCondition());
+            System.out.println(FOUND_FILES_LIST_MSG);
+            fileSearchService.search(fileSearchCommand.getSearchPath(), fileSearchCommand.getSearchCondition())
+                    .forEach(System.out::println);
 
         } else if (CHANGE_COMMAND.equals(parsedCommand)) {
-
-
+            System.out.println(CHANGED_FILES_LIST_LIST_MSG);
+            fileChangeService.change(fileChangeCommand.getSearchPath(), fileChangeCommand.getSearchCondition());
         }
     }
 }

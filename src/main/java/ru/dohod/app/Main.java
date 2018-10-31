@@ -6,9 +6,10 @@ import ru.dohod.api.service.UtilityService;
 import java.io.IOException;
 
 /**
+ * Command line arguments samples:
  * -readDrives
  * -search --searchPath=F:\Git\github\test_tasks\file_system_utility\tmp --searchCondition=pom
- * -change --searchPath=path --searchCondition=cond
+ * -change --searchPath=F:\Git\github\test_tasks\file_system_utility\tmp --searchCondition=pom
  */
 public class Main {
     private static final String CONTEXT_CONFIG_PATH = "classpath:context.xml";

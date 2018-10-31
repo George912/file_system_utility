@@ -9,6 +9,7 @@ import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Service("fileSearchService")
 public class FileSearchServiceImpl implements FileSearchService {
@@ -19,10 +20,10 @@ public class FileSearchServiceImpl implements FileSearchService {
     }
 
     @Override
-    public void search(String searchPath, String searchCondition) throws IOException {
+    public List<Path> search(String searchPath, String searchCondition) throws IOException {
         finder.init(buildGlobPattern(searchCondition));
         Files.walkFileTree(Paths.get(searchPath), (FileVisitor<? super Path>) finder);
-        finder.done().forEach(path -> System.out.println(path));
+        return finder.done();
     }
 
     /**
