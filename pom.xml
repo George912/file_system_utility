@@ -18,6 +18,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <!--dependencies-->
     <dependency.jcommander.version>1.72</dependency.jcommander.version>
+    <dependency.spring.version>5.1.1.RELEASE</dependency.spring.version>
   </properties>
 
   <dependencies>
@@ -27,6 +28,24 @@
       <version>${dependency.jcommander.version}</version>
     </dependency>
 
+    <!--spring-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${dependency.spring.version}</version>
+    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-beans</artifactId>-->
+      <!--<version>${dependency.spring.version}</version>-->
+      <!--<scope>runtime</scope>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-core</artifactId>-->
+      <!--<version>${dependency.spring.version}</version>-->
+      <!--<scope>runtime</scope>-->
+    <!--</dependency>-->
   </dependencies>
 
   <build>
