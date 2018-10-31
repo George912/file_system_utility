@@ -4,7 +4,31 @@ import com.beust.jcommander.Parameter;
 
 public abstract class AbstractFileCommand {
     @Parameter(names = "--searchPath", description = "Absolute search path")
-    protected String searchPath;
+    private String searchPath;
     @Parameter(names = "--searchCondition", description = "Part/full file name")
-    protected String searchCondition;
+    private String searchCondition;
+
+    public String getSearchPath() {
+        return searchPath;
+    }
+
+    public void setSearchPath(String searchPath) {
+        this.searchPath = searchPath;
+    }
+
+    public String getSearchCondition() {
+        return searchCondition;
+    }
+
+    public void setSearchCondition(String searchCondition) {
+        this.searchCondition = searchCondition;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractFileCommand{" +
+                "searchPath='" + searchPath + '\'' +
+                ", searchCondition='" + searchCondition + '\'' +
+                '}';
+    }
 }

@@ -3,15 +3,17 @@ package ru.dohod.app;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import ru.dohod.api.service.UtilityService;
 
+import java.io.IOException;
+
 /**
  * -readDrives
- * -find --searchPath=path --searchCondition=cond
+ * -search --searchPath=F:\Git\github\test_tasks\file_system_utility\tmp --searchCondition=pom
  * -change --searchPath=path --searchCondition=cond
  */
 public class Main {
     private static final String CONTEXT_CONFIG_PATH = "classpath:context.xml";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load(CONTEXT_CONFIG_PATH);
         ctx.refresh();

@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 public class FileChangeCommand extends AbstractFileCommand{
     @Override
     public String toString() {
-        return "FileChangeCommand{" +
-                "searchPath='" + searchPath + '\'' +
-                ", searchCondition='" + searchCondition + '\'' +
-                "} " + super.toString();
+        return "FileChangeCommand{} " + super.toString();
     }
 }
